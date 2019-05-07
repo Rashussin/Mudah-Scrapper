@@ -3,7 +3,7 @@
 #
 #  test.py
 #  
-#  Copyright 2019 Wan Rashdan <Wan Rashdan@DESKTOP-GIM6MP2>
+#  Copyright 2019 Rasrizalrosdi@gmail.com
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
