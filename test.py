@@ -25,8 +25,14 @@ import json
 import requests
 #import bs4
 from bs4 import BeautifulSoup
+import smtplib
+import array
 
 def main(args):
+	
+	user="stealingedge@gmail.com"
+	pwd ="12345678Daun"
+	
 	res = requests.get('https://www.mudah.my/malaysia/cars-for-sale?lst=0&fs=1&q=kelisa&so=1&trm=1&pe=2')
 	soup = BeautifulSoup(res.text, 'lxml')
 	#type(res)
@@ -48,11 +54,31 @@ def main(args):
 		#print(data_text.get_text()[27:])
 	#link_script_data = json.loads()
 	link_script_data = json.loads(link_script[2].get_text())
+	i = 0
+	msg = []
 	
 	for data in link_script_data['itemListElement']:
-		print("Name :", data['name'] ,"Price :",data['offers']['price'])
-		print("--- URL :", data['url'])
-		print(" ")
+	#	print("Name :", data['name'])
+	#	print("--- Price :","Price :",data['offers']['price'])
+	#	print("--- URL   :", data['url'])
+	#	print(" ")
+		data_str = "Name :" + data['name'] + '\n' + "--- Price :RM" + data['offers']['price']+'\n' + "--- URL   :" + data['url']+'\n\n'
+		msg.append(data_str)
+		#print(msg[i])
+		i = i + 1
+	
+	#print(msg)
+	msg.append('Contact Me: \n https://github.com/syirasky \n https://www.facebook.com/ras.rizal.1')
+	appended_msg = ''.join(msg)
+	print(appended_msg)
+	try:
+		s = smtplib.SMTP('smtp.gmail.com',587)
+		s.starttls()
+		s.login(user,pwd)
+		s.sendmail(user,"stealingedge@gmail.com",'Subject: Mudah Scrapper (Syirasky)\n'+appended_msg)
+		print("Email Sent")
+	except smtplib.SMTPException:
+		print("Error Occured")
 	
 	
 	return 0
