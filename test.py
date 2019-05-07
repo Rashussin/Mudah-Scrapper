@@ -30,8 +30,9 @@ import array
 
 def main(args):
 	
-	user="stealingedge@gmail.com"
-	pwd ="12345678Daun"
+	user="YourEmail@gmail.com"
+	pwd ="Password"
+	recepient_email = "recepient_email@gmail.com"
 	
 	res = requests.get('https://www.mudah.my/malaysia/cars-for-sale?lst=0&fs=1&q=kelisa&so=1&trm=1&pe=2')
 	soup = BeautifulSoup(res.text, 'lxml')
@@ -75,7 +76,7 @@ def main(args):
 		s = smtplib.SMTP('smtp.gmail.com',587)
 		s.starttls()
 		s.login(user,pwd)
-		s.sendmail(user,"stealingedge@gmail.com",'Subject: Mudah Scrapper (Syirasky)\n'+appended_msg)
+		s.sendmail(user,recepient_email,'Subject: Mudah Scrapper (Syirasky)\n'+appended_msg)
 		print("Email Sent")
 	except smtplib.SMTPException:
 		print("Error Occured")
