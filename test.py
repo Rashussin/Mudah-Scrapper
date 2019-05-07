@@ -21,7 +21,7 @@
 #  MA 02110-1301, USA.
 #  
 #  
-
+import json
 import requests
 #import bs4
 from bs4 import BeautifulSoup
@@ -31,10 +31,30 @@ def main(args):
 	soup = BeautifulSoup(res.text, 'lxml')
 	#type(res)
 	#print(soup.find_all('title'))
-	#print(res.text)
-	for link in soup.find_all('a'):
-		print(link.get('title'))
+	#print(soup.prettify())
+	link_script = soup.find_all("script", type="application/ld+json")
+	#link_container =  soup.find_all('div', class_ = 'footerline.listing_right.list_ads.list_big_thumbnail')
+	
+	#-----------------------------process response for div
+	#print(type(link_container))
+	#print(len(link_container))
+	#for link in link_container:
+		#print(link.get('id'))
+		#print(link)
+		
+	#------------------------------process response script
+	print(len(link_script))
+	#for data_text in link_script:
+		#print(data_text.get_text()[27:])
+	#link_script_data = json.loads()
+	link_script_data = json.loads(link_script[2].get_text())
+	print(link_script_data)
+	
+	
+	
 	return 0
+	
+	
 
 if __name__ == '__main__':
     import sys
