@@ -43,13 +43,16 @@ def main(args):
 		#print(link)
 		
 	#------------------------------process response script
-	print(len(link_script))
+	#print(len(link_script))
 	#for data_text in link_script:
 		#print(data_text.get_text()[27:])
 	#link_script_data = json.loads()
 	link_script_data = json.loads(link_script[2].get_text())
-	print(link_script_data)
 	
+	for data in link_script_data['itemListElement']:
+		print("Name :", data['name'] ,"Price :",data['offers']['price'])
+		print("--- URL :", data['url'])
+		print(" ")
 	
 	
 	return 0
